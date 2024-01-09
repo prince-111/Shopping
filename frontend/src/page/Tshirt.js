@@ -6,53 +6,128 @@ const Tshirt = () => {
   const API_URL = "https://fakestoreapi.com/products";
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [priceRange, setPriceRange] = useState(null);
 
-  async function fetchData() {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
     setLoading(true);
 
     try {
       const response = await fetch(API_URL);
       const data = await response.json();
-
-      // Filter data for men's clothing category
-      const mensClothingData = data.filter(
-        (item) => item.category === "men's clothing"
-      );
-      // console.log(data);
-      // setItems(data);
-      setItems(mensClothingData);
-
-      console.log(mensClothingData);
+      setItems(data);
     } catch (error) {
       console.log("Error aa gya");
       setItems([]);
     }
 
     setLoading(false);
-  }
+  };
 
-  useEffect(() => {
+  const handleCategoryClick = (category) => {
+    // If the clicked category is the same as the selected category, clear it.
+    const newCategory = selectedCategory === category ? null : category;
+
+    setSelectedCategory(newCategory);
+
+    // Filter data based on selected category
+    const filteredData = filterItems(newCategory, priceRange);
+    setItems(filteredData);
+  };
+
+  const handlePriceFilter = (min, max) => {
+    // Filter data based on price range
+    const filteredData = filterItems(selectedCategory, { min, max });
+    setItems(filteredData);
+    setPriceRange({ min, max });
+  };
+
+  const handleClearCategory = () => {
+    setSelectedCategory(null);
+    // Refetch data when clearing the category
     fetchData();
-  }, []);
+  };
+
+  const filterItems = (category, priceRange) => {
+    let filteredData = items;
+
+    // Filter by category
+    if (category) {
+      filteredData = items.filter((item) => item.category === category);
+    }
+
+    // Filter by price range
+    if (priceRange) {
+      const { min, max } = priceRange;
+      filteredData = filteredData.filter(
+        (item) => (!min || item.price >= min) && (!max || item.price <= max)
+      );
+    }
+
+    return filteredData;
+  };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center mt-4 ">
       {loading ? (
         <Spinner />
       ) : (
-        <div>
-          <img
-            src="https://www.beyoung.in/api//cache/catalog/products/banner_desktop/Full-Sleeves-T-Shirts-Banner-desktop-view_17_2_2023_1920x475.jpg"
-            alt=""
-          />
+        <div className="">
+          {/* Buttons for categories */}
+          <button
+            className={`me-4 ms-4 ${
+              selectedCategory === "men's clothing" ? "bg-gray-300 rounded text-black p-1" : ""
+            }`}
+            onClick={() => handleCategoryClick("men's clothing")}
+          >
+            Men's Clothing
+          </button>
+          <button
+            className={`me-4 ms-4 ${
+              selectedCategory === "jewelery" ? "bg-gray-300 rounded text-black p-1" : ""
+            }`}
+            onClick={() => handleCategoryClick("jewelery")}
+          >
+            Jewelery
+          </button>
+          <button
+            className={`me-4 ms-4 ${
+              selectedCategory === "electronics" ? "bg-gray-300 rounded text-black p-1" : ""
+            }`}
+            onClick={() => handleCategoryClick("electronics")}
+          >
+            Electronics
+          </button>
 
+          {/* Button to clear category */}
+          <button
+            className={`me-4 ms-4 ${
+              !selectedCategory ? "bg-gray-300 rounded text-black p-1" : ""
+            }`}
+            onClick={handleClearCategory}
+          >
+            Clear
+          </button>
+
+          {/* Buttons for price ranges */}
+          <div>
+            {/* Include your price range buttons here */}
+          </div>
+
+          {/* Display items */}
           <div
-            className="mx-auto  grid xl:grid-cols-4 w-11/12 xl:max-w-[1111px] gap-x-4 gap-y-14 my-12
+            className="mx-auto grid xl:grid-cols-4 w-11/12 xl:max-w-[1111px] gap-x-4 gap-y-14 my-12
                             grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:max-w-[800px] sm:max-w-[600px] max-w-[300px]"
           >
-            {items.length === 0
-              ? "No Data Found"
-              : items.map((item) => <Item key={item.id} details={item} />)}
+            {items.length === 0 ? (
+              <p>No Data Found</p>
+            ) : (
+              items.map((item) => <Item key={item.id} details={item} />)
+            )}
           </div>
         </div>
       )}
@@ -61,23 +136,3 @@ const Tshirt = () => {
 };
 
 export default Tshirt;
-
-{
-  /* <div>
-<img
-  src="https://www.beyoung.in/api//cache/catalog/products/banner_desktop/Full-Sleeves-T-Shirts-Banner-desktop-view_17_2_2023_1920x475.jpg"
-  alt=""
-/>
-</div>
-<div className="container mx-6">
-<h3>T SHIRTS FOR MEN</h3>
-<p className="flex-auto mt-2 mb-1">
-  Shop T shirts for men online from Beyoung’s diverse collections. You
-  will love resonating with our premium quality Printed T Shirts
-  available in various colors & interesting themes. We have different
-  silhouettes to match your vibe and speak your style. Your one-stop
-  everyday fashion brand Beyoung! Enjoy browsing and shopping online
-  Mens T shirts starting from ₹299/-
-</p>
- </div> */
-}
