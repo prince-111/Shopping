@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import Slider from "react-slick";
+import BestSeller from "./BestSeller";
 
 const Header = () => {
   return (
@@ -34,7 +36,7 @@ const Header = () => {
       {/* BIG SAVING ZONE */}
       <div>
         <section className="text-gray-600 body-font">
-          <div className="container px-5 py-24 mx-auto">
+          <div className="container px-5 py-14 mx-auto">
             <div className="flex flex-col w-full mb-2">
               <h1 className="text-2xl font-medium title-font mb-4 text-gray-900 border-l-8 border-yellow-300 font-serif font-semibold">
                 {" "}
@@ -42,51 +44,50 @@ const Header = () => {
               </h1>
             </div>
             <div className="flex flex-wrap -m-4">
-             
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                   <NavLink to="/tshirts">
+                  <NavLink to="/tshirts">
                     <img
-                    alt="team"
-                    className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
-                    src="https://www.beyoung.in/api/catalog/homepage-5-dec/big-saving/7.jpg"
-                  />
+                      alt="team"
+                      className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
+                      src="https://www.beyoung.in/api/catalog/homepage-5-dec/big-saving/7.jpg"
+                    />
                   </NavLink>
                 </div>
               </div>
 
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                <NavLink to="/tshirts">
-                  <img
-                    alt="team"
-                    className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
-                    src="https://www.beyoung.in/api/catalog/homepage-5-dec/new-desktop/big-saving-zone.jpg"
-                  />
+                  <NavLink to="/tshirts">
+                    <img
+                      alt="team"
+                      className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
+                      src="https://www.beyoung.in/api/catalog/homepage-5-dec/new-desktop/big-saving-zone.jpg"
+                    />
                   </NavLink>
                 </div>
               </div>
 
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                <NavLink to="/tshirts">
-                  <img
-                    alt="team"
-                    className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
-                    src="https://www.beyoung.in/api/catalog/homepage-5-dec/big-saving/1.jpg"
-                  />
+                  <NavLink to="/tshirts">
+                    <img
+                      alt="team"
+                      className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
+                      src="https://www.beyoung.in/api/catalog/homepage-5-dec/big-saving/1.jpg"
+                    />
                   </NavLink>
                 </div>
               </div>
 
               <div className="p-4 lg:w-1/4 md:w-1/2">
                 <div className="h-full flex flex-col items-center text-center">
-                <NavLink to="/tshirts">
-                  <img
-                    alt="team"
-                    className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
-                    src="https://www.beyoung.in/api/catalog/homepage-5-dec/big-saving/3.jpg"
-                  />
+                  <NavLink to="/tshirts">
+                    <img
+                      alt="team"
+                      className="flex-shrink-0 rounded-lg w-full object-cover object-center mb-4"
+                      src="https://www.beyoung.in/api/catalog/homepage-5-dec/big-saving/3.jpg"
+                    />
                   </NavLink>
                 </div>
               </div>
@@ -94,6 +95,8 @@ const Header = () => {
           </div>
         </section>
       </div>
+
+      <BestSeller />
 
       {/* SHOP THE LOOK */}
       <div>

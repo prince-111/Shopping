@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
 
 const Cart = () => {
@@ -72,7 +72,8 @@ const Cart = () => {
                 Total Amount:{" "}
                 <span className="font-bold"> ${totalAmount} </span>
               </p>
-
+               
+               <NavLink to="/checkout">
               <button
                 className="w-full sm:py-3 bg-green-700 text-white uppercase font-bold rounded-md text-[17px]
                                    border-green-700 border-2 hover:bg-white hover:text-green-700 
@@ -80,6 +81,7 @@ const Cart = () => {
               >
                 Checkout Now
               </button>
+              </NavLink>
             </div>
           </div>
         </div>
