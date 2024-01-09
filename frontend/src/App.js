@@ -7,8 +7,8 @@ import Shirts from "./page/Shirts";
 import BottomWears from "./page/BottomWears";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Cart from "./components/Cart";
-import Checkout from "./components/Checkout";
+import Cart from "./page/Cart";
+import Checkout from "./page/Checkout";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 
@@ -16,7 +16,6 @@ const App = () => {
   return (
     <>
     <Navbar/>
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route exact path="/tshirts" element={<Tshirt />}/>
@@ -28,7 +27,6 @@ const App = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>}/>
         </Routes>
-      </BrowserRouter>
       <Footer/>
     </>
   );
